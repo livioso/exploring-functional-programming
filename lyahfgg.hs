@@ -103,6 +103,21 @@ minusV (Just(Vec3 a b c)) (Just(Vec3 x y z)) = Just(Vec3 (a-x) (b-y) (c-z))
 minusV Nothing _ = Nothing
 minusV _ Nothing = Nothing
 
+
+solve01 :: Double -> Double -> (Double, Double)
+solve01 p q =
+ let pOver2 = p / 2
+     root = sqrt (pOver2^2 - q)
+ in (-pOver2 + root, -pOver2 - root)
+
+solve :: Double -> Double -> (Double, Double)
+solve p q =
+ let {
+ 	pOver2 = p / 2;
+ 	root = sqrt (pOver2^2 - q);
+ } in (-pOver2 + root, -pOver2 - root)
+
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
