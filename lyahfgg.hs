@@ -117,6 +117,39 @@ solve p q =
  	root = sqrt (pOver2^2 - q);
  } in (-pOver2 + root, -pOver2 - root)
 
+solve03 :: Double -> Double -> Maybe (Double, Double)
+solve03 p q 
+	| ((p / 2)^2 - q > 0) = Just (solve p q)
+	| otherwise = Nothing
+
+data ZeroOneTwo a 
+	= Zero
+	| One a
+	| Two a a
+	deriving(Show)
+
+-- that gives Zero, or One solution, or Two solutions 
+-- to the quadratic equation, depending on the actual situation.
+solve04 :: Double -> Double -> ZeroOneTwo Double
+solve04 p q
+	| ((p / 2)^2 - q > 0) = Two (-pOver2 + root) (-pOver2 - root)
+	| ((p / 2)^2 - q == 0) = One (-(p / 2))
+	| otherwise = Zero
+		where {
+			pOver2 = p / 2;
+    		root = sqrt (pOver2^2 - q);
+	}
+
+-- bubblesort
+bsort :: Ord a => [a] -> [a]
+bsort s = case _bsort s of
+               t | t == s    -> t
+                 | otherwise -> bsort t
+  where _bsort (x:x2:xs) | x > x2    = x2:(_bsort (x:xs))
+                         | otherwise = x:(_bsort (x2:xs))
+        _bsort s = s
+
+
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -149,3 +182,6 @@ main = do
 	print(plusV u v)
 	print(negV u)
 	print(minusV (Just u) (Just v))
+
+	print(solve03 2 3)
+	print(solve03 3 1)
