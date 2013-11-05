@@ -149,7 +149,33 @@ bsort s = case _bsort s of
                          | otherwise = x:(_bsort (x2:xs))
         _bsort s = s
 
+sqrtF :: Double -> Maybe Double
+sqrtF x
+  | x < 0     = Nothing
+  | otherwise = Just (sqrt x)
 
+
+recipF :: Double -> Maybe Double
+recipF x
+  | x == 0    = Nothing
+  | otherwise = Just (recip x)
+
+-- kleisli01, kleisli02 :: Double -> Maybe Double
+-- kleisli01 = sqrtF >=> recipF
+-- kleisli02 = recipF >=> sqrtF
+-- 		• 	kleisli01 x first applies sqrtF to x.
+-- 		• 	If the result is Nothing, the result of kleisli01 x is Nothing.
+-- 		• 	If the result is Just a value, recipF is applied to this value, 
+--			and the result is the result of kleisli01 x.
+(>=>) g f x
+	| ((f(x) /= Nothing) == True) = g((\(Just x) -> x) (f x))
+	| otherwise = Nothing
+
+-- .. or by using "case"; same as (>=>)
+(>==>) g f x =
+	case g x of
+			Just y -> f y
+			Nothing	-> Nothing
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -185,3 +211,6 @@ main = do
 
 	print(solve03 2 3)
 	print(solve03 3 1)
+
+	let maybeSomthingCool = (sqrtF >=> recipF) (16)
+	print(maybeSomthingCool)
