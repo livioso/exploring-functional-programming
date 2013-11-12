@@ -11,7 +11,7 @@ getIntFromBoolOrBoolFromBool (IntKind a) = a
 
 -- cart. pro. type
 data Mercedes = C180 | C220 | C250 deriving (Show)
-data CarColor = Red | Green | Yellow | Pink deriving (Show)
+data CarColor = Red | Green | Yellow | Pink
 data MercedesDescription = MercedesDesc Mercedes CarColor deriving (Show)
 
 isMyMercedesCool :: MercedesDescription -> String
@@ -177,6 +177,41 @@ recipF x
 			Just y -> f y
 			Nothing	-> Nothing
 
+-- type constraint
+-- only works on stuff that is actually sortable
+-- (for all possible types a that are instances of class Ord)
+sortG :: Ord a => (a, a) -> (a, a)
+sortG (x, y)
+  | x <= y    = (x, y)
+  | otherwise = (y, x)
+
+getValueIfEquals :: Eq a => a -> a -> Maybe a
+getValueIfEquals x y
+	| x == y = Just x
+	| True = Nothing
+
+compare :: (Ord a) => a -> a -> Ordering
+compare x y
+      | x == y    = EQ
+      | x <= y    = LT
+      | otherwise = GT
+
+instance Eq CarColor where
+	Red == Red = True
+	Yellow == Yellow = True
+	Green == Green = True
+	Pink == Pink = True
+	_ == _ = False
+
+instance Show CarColor where
+	show  Red = " is Red"
+	show  Yellow = " is Yellow"
+	show  Green = " is Green"
+	show  Pink = " is Pink"
+
+-- we can also let the compiler do it
+data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -214,3 +249,6 @@ main = do
 
 	let maybeSomthingCool = (sqrtF >=> recipF) (16)
 	print(maybeSomthingCool)
+
+	let toBeSorted = (5, 2)
+	print(sortG toBeSorted)
