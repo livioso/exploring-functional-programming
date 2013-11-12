@@ -190,8 +190,8 @@ getValueIfEquals x y
 	| x == y = Just x
 	| True = Nothing
 
-compare :: (Ord a) => a -> a -> Ordering
-compare x y
+ccompare :: (Ord a) => a -> a -> Ordering
+ccompare x y
       | x == y    = EQ
       | x <= y    = LT
       | otherwise = GT
@@ -208,6 +208,16 @@ instance Show CarColor where
 	show  Yellow = " is Yellow"
 	show  Green = " is Green"
 	show  Pink = " is Pink"
+
+notEqual :: (Eq a) => a -> a -> Bool
+notEqual a b
+	| a == b = False
+	| otherwise = True
+
+greaterEqual :: (Ord a) => a -> a -> Bool
+greaterEqual a b
+	| (compare a b == GT) = True
+	| otherwise = False
 
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
