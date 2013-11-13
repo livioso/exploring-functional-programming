@@ -219,6 +219,9 @@ greaterEqual a b
 	| (compare a b == GT) = True
 	| otherwise = False
 
+data Mod3 = Zero3 | One3 | Two3
+data Mod12 = M Integer
+
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
 
