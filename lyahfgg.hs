@@ -223,12 +223,6 @@ greaterEqual a b
 data Mod3 = Zero3 | One3 | Two3 deriving (Show, Eq)
 data Mod12 = M Int
 
-instance Num Mod12 where
-	(M x) + (M y) = M((x + y) `mod` 12)
-	(M x) * (M y) = M((x * y) `mod` 12)
-	(M x) - (M y) = M((x - y) `mod` 12)
-	fromInteger x = M(fromInteger x `mod` 12)
-
 -- Throws an exception if I try 
 -- to use a not implemented method
 instance Num Mod3 where
@@ -255,6 +249,16 @@ instance Num Mod3 where
 			1 -> One3
 			2 -> Two3
 
+instance Num Mod12 where
+	(M x) + (M y) = M((x + y) `mod` 12)
+	(M x) * (M y) = M((x * y) `mod` 12)
+	(M x) - (M y) = M((x - y) `mod` 12)
+	fromInteger x = M(fromInteger x `mod` 12)
+
+fib :: (Num a, Eq a) => a -> a
+fib 0 = 0
+fib 1 = 1
+fib n = fib(n-1) + fib(n-2)
 
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
@@ -299,3 +303,5 @@ main = do
 
 	let toBeSorted = (5, 2)
 	print(sortG toBeSorted)
+
+	print (fib 10)
