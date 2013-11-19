@@ -1,4 +1,5 @@
 (&&&) :: Bool -> Bool -> Bool
+
 (&&&) True True = True
 (&&&) _ _		= False
 
@@ -219,8 +220,41 @@ greaterEqual a b
 	| (compare a b == GT) = True
 	| otherwise = False
 
-data Mod3 = Zero3 | One3 | Two3
-data Mod12 = M Integer
+data Mod3 = Zero3 | One3 | Two3 deriving (Show, Eq)
+data Mod12 = M Int
+
+instance Num Mod12 where
+	(M x) + (M y) = M((x + y) `mod` 12)
+	(M x) * (M y) = M((x * y) `mod` 12)
+	(M x) - (M y) = M((x - y) `mod` 12)
+	fromInteger x = M(fromInteger x `mod` 12)
+
+-- Throws an exception if I try 
+-- to use a not implemented method
+instance Num Mod3 where
+	-- (+) :: Mod3 -> Mod3 -> Mod3
+	Zero3 + x = x
+	x + Zero3 = x
+	One3 + One3 = Two3
+	One3 + Two3 = Zero3
+	Two3 + One3 = Zero3
+	Two3 + Two3 = One3
+	-- (*) :: Mod3 -> Mod3 -> Mod3
+	Zero3 * x = Zero3
+	x * Zero3 = Zero3
+	One3 * x = x
+	x * One3 = x
+	Two3 * Two3 = One3
+	-- negate x = 0 - x
+	negate Zero3 = Zero3
+	negate One3 = Two3
+	negate Two3 = One3
+	fromInteger x = 
+		case x `mod` 3 of
+			0 -> Zero3
+			1 -> One3
+			2 -> Two3
+
 
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
