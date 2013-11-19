@@ -265,6 +265,15 @@ fac n
   | n <= 0 = 0
   | otherwise = n * fac (n - 1)
 
+-- my own uberlist
+data List a = Nil | Cons a (List a) deriving(Show)
+
+mmax :: Ord a => List a -> a
+mmax (Cons a Nil) = a
+
+hhead :: List a -> a
+hhead (Cons a _) = a
+
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
 
@@ -310,3 +319,6 @@ main = do
 	print(sortG toBeSorted)
 
 	print (fib 10)
+
+	let myList = Cons 2(Cons 3(Cons 4 Nil))
+	print(hhead myList)
