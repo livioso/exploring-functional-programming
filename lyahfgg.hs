@@ -305,7 +305,16 @@ sumList (Cons x xs) = x + sumList xs
 --------------------------------------------------
 --     
 --      |########| << Pattern // Not an expression     
---          
+--
+
+repConst :: Int -> a -> List a
+repConst 0 _ = Nil
+repConst n c = Cons c(repConst (n-1) c)
+
+-- Composition: (f°g)x = f(g(x))
+funnyMult x y = sumList(repConst x y)
+--              |-------------------|	(sumList ° repConst x) y
+funnyMultWithComposition x = sumList.repConst x
 
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
