@@ -267,12 +267,45 @@ fac n
 
 -- my own uberlist
 data List a = Nil | Cons a (List a) deriving(Show)
+-- Types:
+-- 		Nil :: List a
+--  	Cons :: a -> List a -> List a
+-- 		Cons (5 :: Int) :: List Int -> List Int
+-- 		Cons 5 :: Num a => List a -> List a
+
+-- Cons 5 (Cons 3 (Cons 6 Nil))
+--                        |---| List a
+-- 				        ||      Int	
+--                |-----------| List Int
+--              ||              Int
+-- 	       |------------------| List Int
+-- 		 ||				        Int
+-- |--------------------------| List Int
+--
 
 mmax :: Ord a => List a -> a
 mmax (Cons a Nil) = a
 
 hhead :: List a -> a
 hhead (Cons a _) = a
+
+sumList :: List Int -> Int
+sumList Nil = 0
+sumList (Cons x xs) = x + sumList xs
+--            |                 		Int
+--              ||              		List Int
+--       |-------|              		List Int
+--
+--                  = x + sumList xs
+--                    |         		Int
+--								  ||    List Int
+--                        |--------|    Int
+--                    |------------|    Int
+--     
+--------------------------------------------------
+--     
+--      |########| << Pattern // Not an expression     
+--          
 
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
@@ -321,4 +354,4 @@ main = do
 	print (fib 10)
 
 	let myList = Cons 2(Cons 3(Cons 4 Nil))
-	print(hhead myList)
+	print(sumList myList)
