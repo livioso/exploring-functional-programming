@@ -320,8 +320,21 @@ prepend :: List a -> List a -> List a
 prepend Nil Nil = Nil
 prepend (Cons x xs) ys = Cons x(prepend xs ys)
 prepend Nil ys = ys
-prepend xs Nil = xs
 
+reverseList :: List a -> List a
+reverseList Nil = Nil
+reverseList (Cons x xs) = prepend (reverseList xs)(Cons x Nil)
+
+reverseListTailRecursion :: List a -> List a
+reverseListTailRecursion xs = h xs Nil
+	where {
+	h(Cons x xs) accu = h xs (Cons x accu);
+	h Nil accu = accu
+}
+
+sumLList :: [Int] -> Int
+sumLList [] = 0
+sumLList (x:xs) = x + sumLList xs
 
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
@@ -367,7 +380,19 @@ main = do
 	let toBeSorted = (5, 2)
 	print(sortG toBeSorted)
 
-	print (fib 10)
+	print(fib 10)
 
 	let myList = Cons 2(Cons 3(Cons 4 Nil))
 	print(sumList myList)
+	print(reverseList myList)
+
+	let listA = 5 : 1 : 2 : []; 
+	print(listA)
+
+	let listB = [5, 1, 2];
+	print(listB)
+
+	let sumLListA = sumLList(listA);
+	print(sumLListA)
+
+	print(listA ++ listB)
