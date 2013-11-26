@@ -316,6 +316,13 @@ funnyMult x y = sumList(repConst x y)
 --              |-------------------|	(sumList ° repConst x) y
 funnyMultWithComposition x = sumList.repConst x
 
+prepend :: List a -> List a -> List a
+prepend Nil Nil = Nil
+prepend (Cons x xs) ys = Cons x(prepend xs ys)
+prepend Nil ys = ys
+prepend xs Nil = xs
+
+
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
 
