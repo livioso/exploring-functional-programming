@@ -389,6 +389,15 @@ myMap f (x : []) = [f x]
 myMap f (x : xs) = [f x] ++ myMap f xs
 
 
+myFilter :: (x -> Bool) -> [x] -> [x]
+myFilter _ [] = []
+myFilter predi (x : [])
+	| predi x = [x] 
+	| otherwise = []
+myFilter predi (x : xs)
+	| predi x = [x] ++ myFilter predi xs
+	| otherwise = myFilter predi xs
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -462,3 +471,4 @@ main = do
 	print(myLength listB)
 
 	print(myMap (+3) listB)
+	print(myFilter (odd) [5,6,7])
