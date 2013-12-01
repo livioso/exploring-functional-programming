@@ -388,7 +388,6 @@ myMap :: (x -> x) -> [x] -> [x]
 myMap f (x : []) = [f x]
 myMap f (x : xs) = [f x] ++ myMap f xs
 
-
 myFilter :: (x -> Bool) -> [x] -> [x]
 myFilter _ [] = []
 myFilter predi (x : [])
@@ -397,6 +396,16 @@ myFilter predi (x : [])
 myFilter predi (x : xs)
 	| predi x = [x] ++ myFilter predi xs
 	| otherwise = myFilter predi xs
+
+myConcat :: [x] -> [x] -> [x]
+myConcat [] [] = []
+myConcat [] xs = xs
+myConcat xs [] = xs 
+myConcat (xs) (y : ys) = ys
+
+myIndex :: [x] -> Int -> x
+myIndex (x : _) 0 = x
+myIndex (x : xs) i = myIndex xs (i-1)
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -472,3 +481,5 @@ main = do
 
 	print(myMap (+3) listB)
 	print(myFilter (odd) [5,6,7])
+
+	print(myIndex listB 0)
