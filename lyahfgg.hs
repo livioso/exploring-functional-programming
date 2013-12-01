@@ -3,7 +3,7 @@
 (&&&) True True = True
 (&&&) _ _		= False
 
--- disjoint datatype 
+-- disjoint data type 
 data IntOrBool = BoolKind Bool | IntKind Integer deriving (Show)
 getIntFromBoolOrBoolFromBool :: IntOrBool -> Integer
 getIntFromBoolOrBoolFromBool (BoolKind a) = 1
@@ -141,7 +141,7 @@ solve04 p q
     		root = sqrt (pOver2^2 - q);
 	}
 
--- bubblesort
+-- bubble sort
 bsort :: Ord a => [a] -> [a]
 bsort s = case _bsort s of
                t | t == s    -> t
@@ -339,6 +339,22 @@ sumLList (x:xs) = x + sumLList xs
 -- we can also let the compiler do it
 data Position = TTop | BBottom | LLeft | RRight deriving (Show, Eq)
 
+myMax :: Ord x => [x] -> x
+myMax [] = error "Oppsie!"
+myMax (x : []) = x
+myMax (x : xs)
+	| x > maxTail = x
+	| otherwise = maxTail
+	where maxTail = myMax xs
+	
+myMin :: Ord x => [x] -> x
+myMin [] = error "Empty List"
+myMin (x : []) = x
+myMin (x : xs)
+	| x < smallestX = x
+	| otherwise = smallestX
+	where smallestX = myMin xs 
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -389,10 +405,13 @@ main = do
 	let listA = 5 : 1 : 2 : []; 
 	print(listA)
 
-	let listB = [5, 1, 2];
+	let listB = [5, 1, 2, 10, 230, 2220, 9999, -999, 2, 3, 56, 43, 0];
 	print(listB)
 
 	let sumLListA = sumLList(listA);
 	print(sumLListA)
+
+	print(myMax listB)
+	print(myMin listB)
 
 	print(listA ++ listB)
