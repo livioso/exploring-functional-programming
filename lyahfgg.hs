@@ -417,6 +417,10 @@ myDrop 0 (xs) = xs
 myDrop 1 (x : xs) = xs
 myDrop n (x : xs) = myDrop (n-1) xs
 
+myZip :: [x] -> [y] -> [(x,y)]
+myZip (x : []) (y : _) = [(x,y)] 
+myZip (x : xs) (y : ys) = [(x,y)] ++ (myZip xs ys)
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -496,3 +500,5 @@ main = do
 
 	print(myTake 4 listB)
 	print(myDrop 4 listB)
+
+	print(myZip [1,2,3,4] [2,4,3,4,5,6])
