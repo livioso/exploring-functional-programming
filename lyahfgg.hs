@@ -412,6 +412,11 @@ myTake 0 _ = []
 myTake 1 (x : _) = [x]
 myTake n (x : xs) = [x] ++ (myTake (n-1) xs)
 
+myDrop :: Int -> [x] -> [x]
+myDrop 0 (xs) = xs
+myDrop 1 (x : xs) = xs
+myDrop n (x : xs) = myDrop (n-1) xs
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -488,4 +493,6 @@ main = do
 	print(myFilter (odd) [5,6,7])
 
 	print(myIndex listB 0)
-	print(myTake 4 listB )
+
+	print(myTake 4 listB)
+	print(myDrop 4 listB)
