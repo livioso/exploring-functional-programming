@@ -355,6 +355,11 @@ myMin (x : xs)
 	| otherwise = smallestX
 	where smallestX = myMin xs 
 
+myHead :: [x] -> x
+myHead [] = error "Empty List"
+myHead (x : []) = x
+myHead (x : xs) = x
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -413,5 +418,7 @@ main = do
 
 	print(myMax listB)
 	print(myMin listB)
+
+	print(myHead listB)
 
 	print(listA ++ listB)
