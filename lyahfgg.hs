@@ -375,6 +375,15 @@ myInit [] = error "Empty List"
 myInit (x : []) = []
 myInit (x : xs) = [x] ++ myInit xs
 
+myNull :: [x] -> Bool
+myNull [] = True
+myNull _ = False
+
+myLength :: [x] -> Int
+myLength [] = 0
+myLength (x : xs) = 1 + myLength xs
+
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -441,3 +450,10 @@ main = do
 
 	print(myLast listB)
 	print(myInit listB)
+
+	print(myNull listB)
+	print(myNull [])
+
+	print(myLength listB)
+
+	print(myMap (+3) listB)
