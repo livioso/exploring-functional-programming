@@ -360,6 +360,11 @@ myHead [] = error "Empty List"
 myHead (x : []) = x
 myHead (x : xs) = x
 
+myTail :: [x] -> x
+myTail [] = error "Empty List"
+myTail (x : []) = x
+myTail (x : xs) = myTail xs
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -416,9 +421,10 @@ main = do
 	let sumLListA = sumLList(listA);
 	print(sumLListA)
 
+	print(listA ++ listB)
+
 	print(myMax listB)
 	print(myMin listB)
 
 	print(myHead listB)
-
-	print(listA ++ listB)
+	print(myTail listB)
