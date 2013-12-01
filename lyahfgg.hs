@@ -383,6 +383,11 @@ myLength :: [x] -> Int
 myLength [] = 0
 myLength (x : xs) = 1 + myLength xs
 
+-- See http://hackage.haskell.org/package/base-4.6.0.1/docs/Prelude.html#v:map
+myMap :: (x -> x) -> [x] -> [x]
+myMap f (x : []) = [f x]
+myMap f (x : xs) = [f x] ++ myMap f xs
+
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
