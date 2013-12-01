@@ -360,10 +360,20 @@ myHead [] = error "Empty List"
 myHead (x : []) = x
 myHead (x : xs) = x
 
-myTail :: [x] -> x
+myTail :: [x] -> [x]
 myTail [] = error "Empty List"
-myTail (x : []) = x
-myTail (x : xs) = myTail xs
+myTail (x : []) = [x]
+myTail (x : xs) = xs
+
+myLast :: [x] -> x
+myLast [] = error "Empty List"
+myLast (x : []) = x
+myLast (x : xs) = myLast xs
+
+myInit :: [x] -> [x]
+myInit [] = error "Empty List"
+myInit (x : []) = []
+myInit (x : xs) = [x] ++ myInit xs
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -428,3 +438,6 @@ main = do
 
 	print(myHead listB)
 	print(myTail listB)
+
+	print(myLast listB)
+	print(myInit listB)
