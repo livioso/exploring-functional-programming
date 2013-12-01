@@ -407,6 +407,11 @@ myIndex :: [x] -> Int -> x
 myIndex (x : _) 0 = x
 myIndex (x : xs) i = myIndex xs (i-1)
 
+myTake :: Int -> [x] -> [x]
+myTake 0 _ = []
+myTake 1 (x : _) = [x]
+myTake n (x : xs) = [x] ++ (myTake (n-1) xs)
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -483,3 +488,4 @@ main = do
 	print(myFilter (odd) [5,6,7])
 
 	print(myIndex listB 0)
+	print(myTake 4 listB )
