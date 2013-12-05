@@ -418,8 +418,9 @@ myDrop 1 (x : xs) = xs
 myDrop n (x : xs) = myDrop (n-1) xs
 
 myZip :: [x] -> [y] -> [(x,y)]
-myZip (x : []) (y : _) = [(x,y)] 
-myZip (x : xs) (y : ys) = [(x,y)] ++ (myZip xs ys)
+myZip [] _ = []
+myZip _ [] = []
+myZip (x : xs) (y : ys) = (x,y) : (myZip xs ys)
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
