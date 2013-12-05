@@ -123,11 +123,11 @@ solve03 p q
 	| ((p / 2)^2 - q > 0) = Just (solve p q)
 	| otherwise = Nothing
 
-data ZeroOneTwo a 
-	= Zero
-	| One a
-	| Two a a
-	deriving(Show)
+-- What is the type of x?
+-- Zero :: ZeroOneTwo
+-- One :: a -> ZeroOneTwo a
+-- Two :: a -> a -> ZeroOneTwo a
+data ZeroOneTwo a = Zero | One a | Two a a deriving(Show)
 
 -- that gives Zero, or One solution, or Two solutions 
 -- to the quadratic equation, depending on the actual situation.
@@ -154,7 +154,6 @@ sqrtF :: Double -> Maybe Double
 sqrtF x
   | x < 0     = Nothing
   | otherwise = Just (sqrt x)
-
 
 recipF :: Double -> Maybe Double
 recipF x
