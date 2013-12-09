@@ -20,9 +20,9 @@ isMyMercedesCool (MercedesDesc _ Pink) = "Dude WTF? A pink Mercedes?" -- The unc
 isMyMercedesCool (MercedesDesc _ _) = "Wow, bro! Cool car." -- The cool guys
 
 makeMyMercedesCool :: MercedesDescription -> MercedesDescription
-makeMyMercedesCool (MercedesDesc a Pink) = MercedesDesc a Red
-makeMyMercedesCool a					 = a
-
+makeMyMercedesCool (MercedesDesc a color) 
+					| color == Pink = MercedesDesc a Red
+					| otherwise = MercedesDesc a color
 
 -- cart. pro. type mixed with non cart. pro. type
 data ShapeType = Rectangle Integer Integer | Circle Integer | Point
