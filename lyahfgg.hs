@@ -202,6 +202,7 @@ recipF x
 			Just y -> f y
 			Nothing	-> Nothing
 
+-- equals to fst from prelude
 foapFirstOfAPair :: (a, b) -> a
 foapFirstOfAPair (x, _) = x
 
@@ -225,11 +226,14 @@ ccompare x y
       | otherwise = GT
 
 instance Eq CarColor where
+	-- equality 
 	Red == Red = True
 	Yellow == Yellow = True
 	Green == Green = True
 	Pink == Pink = True
 	_ == _ = False
+	-- not equal
+	x /= y = not (x == y)
 
 instance Show CarColor where
 	show  Red = " is Red"
@@ -280,12 +284,16 @@ instance Num Mod3 where
 			0 -> Zero3
 			1 -> One3
 			2 -> Two3
+	abs x = x
+	signum x = x
 
 instance Num Mod12 where
 	(M x) + (M y) = M((x + y) `mod` 12)
 	(M x) * (M y) = M((x * y) `mod` 12)
 	(M x) - (M y) = M((x - y) `mod` 12)
 	fromInteger x = M(fromInteger x `mod` 12)
+	abs x = x
+	signum x = x
 
 fib :: (Num a, Eq a) => a -> a
 fib 0 = 0
