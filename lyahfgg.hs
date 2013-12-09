@@ -104,13 +104,19 @@ minusV (Just(Vec3 a b c)) (Just(Vec3 x y z)) = Just(Vec3 (a-x) (b-y) (c-z))
 minusV Nothing _ = Nothing
 minusV _ Nothing = Nothing
 
-
+-- where
+increment :: Int -> Int
+increment a = aIncrement
+	where
+		aIncrement = a + 1
+-- let
 solve01 :: Double -> Double -> (Double, Double)
 solve01 p q =
  let pOver2 = p / 2
      root = sqrt (pOver2^2 - q)
  in (-pOver2 + root, -pOver2 - root)
 
+-- let
 solve :: Double -> Double -> (Double, Double)
 solve p q =
  let {
@@ -122,6 +128,19 @@ solve03 :: Double -> Double -> Maybe (Double, Double)
 solve03 p q 
 	| ((p / 2)^2 - q > 0) = Just (solve p q)
 	| otherwise = Nothing
+
+areaOfTwoCricles :: Double -> Double -> Double
+areaOfTwoCricles a b =
+	let areaA = area a
+	    areaB = area b
+	    area r = pi * r^2
+	in areaA + areaB
+
+areaOfTwoCricles2 :: Double -> Double -> Double
+areaOfTwoCricles2 a b = 
+	let { (a1, a2, area) = 
+		(area a, area b, \r -> pi * r^2); } 
+	in a1 + a2
 
 -- What is the type of x?
 -- Zero :: ZeroOneTwo
@@ -140,6 +159,12 @@ solve04 p q
 			pOver2 = p / 2;
     		root = sqrt (pOver2^2 - q);
 	}
+
+divForSure :: Maybe Int -> Int
+divForSure (Just x)
+       | even x 	= div x 2
+       | otherwise 	= div (x-1) 2
+divForSure Nothing = 0
 
 -- bubble sort
 bsort :: Ord a => [a] -> [a]
@@ -167,7 +192,7 @@ recipF x
 -- 		• 	If the result is Nothing, the result of kleisli01 x is Nothing.
 -- 		• 	If the result is Just a value, recipF is applied to this value, 
 --			and the result is the result of kleisli01 x.
-(>=>) g f x
+(>=>) g f x 
 	| ((f(x) /= Nothing) == True) = g((\(Just x) -> x) (f x))
 	| otherwise = Nothing
 
@@ -421,6 +446,16 @@ myZip [] _ = []
 myZip _ [] = []
 myZip (x : xs) (y : ys) = (x,y) : (myZip xs ys)
 
+-- Would result in [2,3,4,5]
+mapped = map (+1) [1, 2, 3, 4]
+
+-- Would result in [2,4,6,8]
+filtered = filter (\x -> (mod) x 2 == 0)  [1, 2, 3, 4, 5, 6, 7, 8]
+
+sumTupple :: [(Int, Char)] -> Int
+sumTupple ((n, c) : []) = n
+sumTupple (x : xs) = fst x + sumTupple xs
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -502,3 +537,11 @@ main = do
 	print(myDrop 4 listB)
 
 	print(myZip [1,2,3,4] [2,4,3,4,5,6])
+
+	print(mapped)
+	print(filtered)
+
+	print(sumTupple [(1, 'c'), (2, 'f'), (333, 'f')])
+	print(increment 1)
+
+	print(areaOfTwoCricles 1 2)
