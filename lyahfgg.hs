@@ -306,6 +306,15 @@ fac n
   | n <= 0 = 0
   | otherwise = n * fac (n - 1)
 
+data L1 = Nil1
+data L2 a = Cons2 a L1 						-- Cons2 :: a -> L1 -> L2 a
+data L3 a = Cons3 a (L2 a)					-- Cons3 :: a -> L2 a -> L3 a
+data L4 a = Cons4 a (L3 a)					-- Cons4 :: a -> L3 a -> L4 a
+l11 = Nil1									-- l11 :: L1
+l12 = Cons2 25 Nil1							-- l12 :: L2 Integer
+l13 = Cons3 26 (Cons2 25 Nil1)				-- l13 :: L3 Integer
+l14 = Cons4 27 (Cons3 26 (Cons2 25 Nil1))	-- l14 :: L4 Integer
+
 -- my own uberlist
 data List a = Nil | Cons a (List a) deriving(Show)
 -- Types:
@@ -324,8 +333,19 @@ data List a = Nil | Cons a (List a) deriving(Show)
 -- |--------------------------| List Int
 --
 
+-- Prelude <list> 
+----------------------------
+-- Prelude> :t []
+--	[] :: [a]
+-- 
+-- Prelude> :t [1]
+--	[1] :: Num t => [t]
+--0
+-- Prelude> :t [(1 :: Int)]
+--	[(1 :: Int)] :: [Int]
+
 mmax :: Ord a => List a -> a
-mmax (Cons a Nil) = a
+mmax (Cons x Nil) = x
 
 hhead :: List a -> a
 hhead (Cons a _) = a
