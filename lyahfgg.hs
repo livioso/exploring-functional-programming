@@ -234,6 +234,12 @@ instance Show CarColor where
 	show  Green = " is Green"
 	show  Pink = " is Pink"
 
+
+sortPairPredict :: (Ord a) => (a, a) -> (a, a)
+sortPairPredict (x, y)
+  | x <= y    = (x, y)
+  | otherwise = (y, x)
+
 notEqual :: (Eq a) => a -> a -> Bool
 notEqual a b
 	| a == b = False
