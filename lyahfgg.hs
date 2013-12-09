@@ -202,6 +202,9 @@ recipF x
 			Just y -> f y
 			Nothing	-> Nothing
 
+foapFirstOfAPair :: (a, b) -> a
+foapFirstOfAPair (x, _) = x
+
 -- type constraint
 -- only works on stuff that is actually sortable
 -- (for all possible types a that are instances of class Ord)
@@ -233,7 +236,6 @@ instance Show CarColor where
 	show  Yellow = " is Yellow"
 	show  Green = " is Green"
 	show  Pink = " is Pink"
-
 
 sortPairPredict :: (Ord a) => (a, a) -> (a, a)
 sortPairPredict (x, y)
