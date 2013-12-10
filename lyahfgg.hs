@@ -448,10 +448,12 @@ myLength :: [x] -> Int
 myLength [] = 0
 myLength (x : xs) = 1 + myLength xs
 
--- See http://hackage.haskell.org/package/base-4.6.0.1/docs/Prelude.html#v:map
-myMap :: (x -> x) -> [x] -> [x]
+-- See http://hackage.haskell.org/package/
+-- base-4.6.0.1/docs/Prelude.html#v:map
+myMap :: (a -> b) -> [a] -> [b]
+myMap f [] = error "Ooopsie. List is empty :("
 myMap f (x : []) = [f x]
-myMap f (x : xs) = [f x] ++ myMap f xs
+myMap f (x : xs) = (f x) : (myMap f xs) -- [f x] ++ (myMap f xs)
 
 myFilter :: (x -> Bool) -> [x] -> [x]
 myFilter _ [] = []
