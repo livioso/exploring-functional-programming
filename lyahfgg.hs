@@ -315,7 +315,7 @@ l12 = Cons2 25 Nil1							-- l12 :: L2 Integer
 l13 = Cons3 26 (Cons2 25 Nil1)				-- l13 :: L3 Integer
 l14 = Cons4 27 (Cons3 26 (Cons2 25 Nil1))	-- l14 :: L4 Integer
 
--- my own uberlist
+-- my own uberlist 
 data List a = Nil | Cons a (List a) deriving(Show)
 -- Types:
 -- 		Nil :: List a
@@ -346,6 +346,10 @@ data List a = Nil | Cons a (List a) deriving(Show)
 
 mmax :: Ord a => List a -> a
 mmax (Cons x Nil) = x
+mmax (Cons x (Cons a b))
+	| x > maxTail = x
+	| otherwise = maxTail
+	where maxTail = mmax (Cons a b)
 
 hhead :: List a -> a
 hhead (Cons a _) = a
@@ -536,9 +540,10 @@ main = do
 
 	print(fib 10)
 
-	let myList = Cons 2(Cons 3(Cons 4 Nil))
+	let myList = Cons 2(Cons 3(Cons 4 (Cons 0 Nil)))
 	print(sumList myList)
 	print(reverseList myList)
+	print(mmax myList)
 
 	let listA = 5 : 1 : 2 : []; 
 	print(listA)
