@@ -538,6 +538,14 @@ instance Num Quantity where
 		| otherwise = Quant (-1) []
 	fromInteger i = Quant (fromInteger i) []
 
+-- removeEvenFromList
+-- eg. "abcde" -> "bde"
+removeEvenFromList [] = []
+removeEvenFromList (x : []) = [x]
+removeEvenFromList (x : xs)
+	| (mod (length xs) 2) == 0 = removeEvenFromList xs
+	| otherwise = x : (removeEvenFromList xs)
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -628,3 +636,4 @@ main = do
 	print(increment 1)
 
 	print(areaOfTwoCricles 1 2)
+	print(removeEvenFromList "abcde")
