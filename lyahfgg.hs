@@ -546,6 +546,14 @@ removeEvenFromList (x : xs)
 	| (mod (length xs) 2) == 0 = removeEvenFromList xs
 	| otherwise = x : (removeEvenFromList xs)
 
+myFoldr :: (a -> b -> b) -> b -> [a] -> b
+myFoldr f v [] = v
+myFoldr f v (x : xs) = x `f` myFoldr f v xs
+
+myFoldl :: (a -> b -> a) -> a -> [b] -> a
+myFoldl f v [] = v
+myFoldl f v (x : xs) = myFoldl f (v `f` x) xs
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
