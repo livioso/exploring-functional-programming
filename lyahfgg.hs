@@ -498,15 +498,36 @@ sumTupple :: [(Int, Char)] -> Int
 sumTupple ((n, c) : []) = n
 sumTupple (x : xs) = fst x + sumTupple xs
 
-data Unit = M | Kg | S deriving (Eq, Show)
+data Unit = Me | Kg | S deriving (Eq, Show)
 type Value = Double
 type Exponent = Int
 type UnitExp = (Unit, Exponent)
 
 data Quantity = Quant Value [UnitExp] deriving (Show)
 
+norm :: [UnitExp] -> [UnitExp]
+norm unitExps = f3 Me unitExps ++ f3 Kg unitExps ++ f3 S unitExps
+
+f1 :: Unit -> [UnitExp] -> [UnitExp]
+f1 unit = filter (\(u, _) -> u == unit)
+
+f2 :: Unit -> [UnitExp] -> [Exponent]
+f2 unit unitExps = map snd (f1 unit unitExps)
+
+f3 :: Unit -> [UnitExp] -> [UnitExp]
+f3 unit unitExps
+	| exp == 0 = []
+	| otherwise = [(unit, exp)]
+	where exp = sum(f2 unit unitExps)
+
 instance Eq Quantity where
-	(Quant v1 ues1) == (Quant v2 ues2) 
+	(Quant v1 ues1) == (Quant v2 ues2)
+		| norm ues1 == norm ues2 = v1 == v2
+
+instance Num Quantity where
+	Quant v1 ues1 + Quant v2 ues2
+		| norm ues1 == norm ues2 = Quant(v1 + v2)(norm ues1)
+	Quant v1 ues1 * Quant v2 ues2 = Quant(v1 + v2)(norm(ues1 ++ ues2)) 
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
