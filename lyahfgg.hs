@@ -1,5 +1,4 @@
 (&&&) :: Bool -> Bool -> Bool
-
 (&&&) True True = True
 (&&&) _ _		= False
 
@@ -498,6 +497,16 @@ filtered = filter (\x -> (mod) x 2 == 0)  [1, 2, 3, 4, 5, 6, 7, 8]
 sumTupple :: [(Int, Char)] -> Int
 sumTupple ((n, c) : []) = n
 sumTupple (x : xs) = fst x + sumTupple xs
+
+data Unit = M | Kg | S deriving (Eq, Show)
+type Value = Double
+type Exponent = Int
+type UnitExp = (Unit, Exponent)
+
+data Quantity = Quant Value [UnitExp] deriving (Show)
+
+instance Eq Quantity where
+	(Quant v1 ues1) == (Quant v2 ues2) 
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
