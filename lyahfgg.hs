@@ -528,6 +528,15 @@ instance Num Quantity where
 	Quant v1 ues1 + Quant v2 ues2
 		| norm ues1 == norm ues2 = Quant(v1 + v2)(norm ues1)
 	Quant v1 ues1 * Quant v2 ues2 = Quant(v1 + v2)(norm(ues1 ++ ues2)) 
+	negate (Quant v ues) = Quant (-v) (norm ues)
+	abs (Quant v ues)
+		| v > 0 = Quant v (norm ues)
+		| otherwise = Quant (-v) (norm ues)
+	signum (Quant v ues)
+		| v == 0 = Quant 0 []
+		| v > 0 = Quant 1 []
+		| otherwise = Quant (-1) []
+	fromInteger i = Quant (fromInteger i) []
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
