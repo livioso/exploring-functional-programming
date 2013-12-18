@@ -555,6 +555,9 @@ myFoldl f v [] = v
 myFoldl f v (x : xs) = myFoldl f (v `f` x) xs
 
 -- todo reverse, ++ and && implement with foldr and foldl implement.
+and_foldr :: [Bool] -> Bool
+and_foldr x = foldr (==) True x
+
 and_foldl :: [Bool] -> Bool
 and_foldl x = foldr (==) True x
 
@@ -657,3 +660,6 @@ main = do
 
 	print(and_foldl [True, True, True, False, True]) -- > False
 	print(and_foldl [True, True, True, True, True]) -- > True
+
+	print(and_foldr [True, True, True, False, True]) -- > False
+	print(and_foldr [True, True, True, True, True]) -- > True
