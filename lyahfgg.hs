@@ -555,6 +555,8 @@ myFoldl f v [] = v
 myFoldl f v (x : xs) = myFoldl f (v `f` x) xs
 
 -- todo reverse, ++ and && implement with foldr and foldl implement.
+and_foldl :: [Bool] -> Bool
+and_foldl x = foldr (==) True x
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -652,3 +654,6 @@ main = do
 	print(foldl (+) 0 [1,2,3]) -- 6
 
 	print(foldl (&&) True [(\x -> x == 1)(1), True, True, odd(3), even(4)])
+
+	print(and_foldl [True, True, True, False, True]) -- > False
+	print(and_foldl [True, True, True, True, True]) -- > True
