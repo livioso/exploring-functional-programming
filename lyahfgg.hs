@@ -562,10 +562,13 @@ and_foldl :: [Bool] -> Bool
 and_foldl x = foldr (==) True x
 
 reverse_foldl :: [a] -> [a]
-reverse_foldl xs = foldl (\xs x -> x:xs) [] xs
+reverse_foldl xs = foldl (\xs x -> x : xs) [] xs
 
 reverse_foldr :: [a] -> [a]
 reverse_foldr xs = foldr (\x xs -> xs ++ [x]) [] xs
+
+concate_foldl :: [a] -> [a] -> [a]
+concate_foldl xs ys = foldr (\x xs -> x : xs) xs ys
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
