@@ -561,6 +561,12 @@ and_foldr x = foldr (==) True x
 and_foldl :: [Bool] -> Bool
 and_foldl x = foldr (==) True x
 
+reverse_foldl :: [a] -> [a]
+reverse_foldl xs = foldl (\xs x -> x:xs) [] xs
+
+reverse_foldr :: [a] -> [a]
+reverse_foldr xs = foldr (\x xs -> xs ++ [x]) [] xs
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -663,3 +669,6 @@ main = do
 
 	print(and_foldr [True, True, True, False, True]) -- > False
 	print(and_foldr [True, True, True, True, True]) -- > True
+
+	print(reverse_foldl [1, 2, 3, 4, 5])
+	print(reverse_foldr [1, 2, 3, 4, 5])
