@@ -2,7 +2,7 @@
 (&&&) True True = True
 (&&&) _ _		= False
 
--- disjoint data type 
+-- disjoint data type
 data IntOrBool = BoolKind Bool | IntKind Integer deriving (Show)
 getIntFromBoolOrBoolFromBool :: IntOrBool -> Integer
 getIntFromBoolOrBoolFromBool (BoolKind a) = 1
@@ -15,11 +15,11 @@ data CarColor = Red | Green | Yellow | Pink
 data MercedesDescription = MercedesDesc Mercedes CarColor deriving (Show)
 
 isMyMercedesCool :: MercedesDescription -> String
-isMyMercedesCool (MercedesDesc _ Pink) = "Dude WTF? A pink Mercedes?" -- The uncool guys 
+isMyMercedesCool (MercedesDesc _ Pink) = "Dude WTF? A pink Mercedes?" -- The uncool guys
 isMyMercedesCool (MercedesDesc _ _) = "Wow, bro! Cool car." -- The cool guys
 
 makeMyMercedesCool :: MercedesDescription -> MercedesDescription
-makeMyMercedesCool (MercedesDesc a color) 
+makeMyMercedesCool (MercedesDesc a color)
 					| color == Pink = MercedesDesc a Red
 					| otherwise = MercedesDesc a color
 
@@ -124,7 +124,7 @@ solve p q =
  } in (-pOver2 + root, -pOver2 - root)
 
 solve03 :: Double -> Double -> Maybe (Double, Double)
-solve03 p q 
+solve03 p q
 	| ((p / 2)^2 - q > 0) = Just (solve p q)
 	| otherwise = Nothing
 
@@ -136,9 +136,9 @@ areaOfTwoCricles a b =
 	in areaA + areaB
 
 areaOfTwoCricles2 :: Double -> Double -> Double
-areaOfTwoCricles2 a b = 
-	let { (a1, a2, area) = 
-		(area a, area b, \r -> pi * r^2); } 
+areaOfTwoCricles2 a b =
+	let { (a1, a2, area) =
+		(area a, area b, \r -> pi * r^2); }
 	in a1 + a2
 
 -- What is the type of x?
@@ -147,7 +147,7 @@ areaOfTwoCricles2 a b =
 -- Two :: a -> a -> ZeroOneTwo a
 data ZeroOneTwo a = Zero | One a | Two a a deriving(Show)
 
--- that gives Zero, or One solution, or Two solutions 
+-- that gives Zero, or One solution, or Two solutions
 -- to the quadratic equation, depending on the actual situation.
 solve04 :: Double -> Double -> ZeroOneTwo Double
 solve04 p q
@@ -189,9 +189,9 @@ recipF x
 -- kleisli02 = recipF >=> sqrtF
 -- 		• 	kleisli01 x first applies sqrtF to x.
 -- 		• 	If the result is Nothing, the result of kleisli01 x is Nothing.
--- 		• 	If the result is Just a value, recipF is applied to this value, 
+-- 		• 	If the result is Just a value, recipF is applied to this value,
 --			and the result is the result of kleisli01 x.
-(>=>) g f x 
+(>=>) g f x
 	| ((f(x) /= Nothing) == True) = g((\(Just x) -> x) (f x))
 	| otherwise = Nothing
 
@@ -225,7 +225,7 @@ ccompare x y
       | otherwise = GT
 
 instance Eq CarColor where
-	-- equality 
+	-- equality
 	Red == Red = True
 	Yellow == Yellow = True
 	Green == Green = True
@@ -258,7 +258,7 @@ greaterEqual a b
 data Mod3 = Zero3 | One3 | Two3 deriving (Show, Eq)
 data Mod12 = M Int
 
--- Throws an exception if I try 
+-- Throws an exception if I try
 -- to use a not implemented method
 instance Num Mod3 where
 	-- (+) :: Mod3 -> Mod3 -> Mod3
@@ -278,7 +278,7 @@ instance Num Mod3 where
 	negate Zero3 = Zero3
 	negate One3 = Two3
 	negate Two3 = One3
-	fromInteger x = 
+	fromInteger x =
 		case x `mod` 3 of
 			0 -> Zero3
 			1 -> One3
@@ -299,7 +299,7 @@ fib 0 = 0
 fib 1 = 1
 fib n = fib(n-1) + fib(n-2)
 
-fac :: Int -> Int 
+fac :: Int -> Int
 fac 0 = 1
 fac n
   | n <= 0 = 0
@@ -314,7 +314,7 @@ l12 = Cons2 25 Nil1							-- l12 :: L2 Integer
 l13 = Cons3 26 (Cons2 25 Nil1)				-- l13 :: L3 Integer
 l14 = Cons4 27 (Cons3 26 (Cons2 25 Nil1))	-- l14 :: L4 Integer
 
--- my own uberlist 
+-- my own uberlist
 data List a = Nil | Cons a (List a) deriving(Show)
 -- Types:
 -- 		Nil :: List a
@@ -324,7 +324,7 @@ data List a = Nil | Cons a (List a) deriving(Show)
 
 -- Cons 5 (Cons 3 (Cons 6 Nil))
 --                        |---| List a
--- 				        ||      Int	
+-- 				        ||      Int
 --                |-----------| List Int
 --              ||              Int
 -- 	       |------------------| List Int
@@ -332,11 +332,11 @@ data List a = Nil | Cons a (List a) deriving(Show)
 -- |--------------------------| List Int
 --
 
--- Prelude <list> 
+-- Prelude <list>
 ----------------------------
 -- Prelude> :t []
 --	[] :: [a]
--- 
+--
 -- Prelude> :t [1]
 --	[1] :: Num t => [t]
 --0
@@ -365,10 +365,10 @@ sumList (Cons x xs) = x + sumList xs
 --								  ||    List Int
 --                        |--------|    Int
 --                    |------------|    Int
---     
+--
 --------------------------------------------------
---     
---      |########| << Pattern // Not an expression     
+--
+--      |########| << Pattern // Not an expression
 --
 
 repConst :: Int -> a -> List a
@@ -410,14 +410,14 @@ myMax (x : xs)
 	| x > maxTail = x
 	| otherwise = maxTail
 	where maxTail = myMax xs
-	
+
 myMin :: Ord x => [x] -> x
 myMin [] = error "Empty List"
 myMin (x : []) = x
 myMin (x : xs)
 	| x < smallestX = x
 	| otherwise = smallestX
-	where smallestX = myMin xs 
+	where smallestX = myMin xs
 
 myHead :: [x] -> x
 myHead [] = error "Empty List"
@@ -457,7 +457,7 @@ myMap f (x : xs) = (f x) : (myMap f xs) -- [f x] ++ (myMap f xs)
 myFilter :: (x -> Bool) -> [x] -> [x]
 myFilter _ [] = []
 myFilter predi (x : [])
-	| predi x = [x] 
+	| predi x = [x]
 	| otherwise = []
 myFilter predi (x : xs)
 	| predi x = [x] ++ myFilter predi xs
@@ -466,7 +466,7 @@ myFilter predi (x : xs)
 myConcat :: [x] -> [x] -> [x]
 myConcat [] [] = []
 myConcat [] xs = xs
-myConcat xs [] = xs 
+myConcat xs [] = xs
 myConcat (xs) (y : ys) = ys
 
 myIndex :: [x] -> Int -> x
@@ -527,7 +527,7 @@ instance Eq Quantity where
 instance Num Quantity where
 	Quant v1 ues1 + Quant v2 ues2
 		| norm ues1 == norm ues2 = Quant(v1 + v2)(norm ues1)
-	Quant v1 ues1 * Quant v2 ues2 = Quant(v1 + v2)(norm(ues1 ++ ues2)) 
+	Quant v1 ues1 * Quant v2 ues2 = Quant(v1 + v2)(norm(ues1 ++ ues2))
 	negate (Quant v ues) = Quant (-v) (norm ues)
 	abs (Quant v ues)
 		| v > 0 = Quant v (norm ues)
@@ -576,7 +576,7 @@ main = do
 	print (isMyMercedesCool myMercedes)
 	let myNowCoolMercedes = (makeMyMercedesCool myMercedes)
 	print (isMyMercedesCool myNowCoolMercedes)
-	
+
 	let me2 = ("Livio Bieri", 007)
 	print (firsty me2)
 
@@ -618,7 +618,7 @@ main = do
 	print(reverseList myList)
 	print(mmax myList)
 
-	let listA = 5 : 1 : 2 : []; 
+	let listA = 5 : 1 : 2 : [];
 	print(listA)
 
 	let listB = [5, 1, 2, 10, 230, 2220, 9999, -999, 2, 3, 56, 43, 0];
