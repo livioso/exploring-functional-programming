@@ -567,6 +567,9 @@ reverse_foldl xs = foldl (\xs x -> x : xs) [] xs
 reverse_foldr :: [a] -> [a]
 reverse_foldr xs = foldr (\x xs -> xs ++ [x]) [] xs
 
+concate_foldr :: [a] -> [a] -> [a]
+concate_foldr xs ys = foldr (\x xs -> x : xs) xs ys
+
 concate_foldl :: [a] -> [a] -> [a]
 concate_foldl xs ys = foldr (\x xs -> x : xs) xs ys
 
