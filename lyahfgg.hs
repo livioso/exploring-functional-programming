@@ -586,7 +586,7 @@ concate_foldr xs ys = foldr (\x xs -> x : xs) xs ys
 -- concate_foldl :: [a] -> [a] -> [a]
 
 -- reverseAppend [3, 2, 1] [4, 5, 6] -> [1, 2, 3, 4, 5, 6]
--- -------->>>>>> (:) :: a -> [a] -> [a]
+-- >>>>>> (:) :: a -> [a] -> [a]
 reverseAppend :: [a] -> [a] -> [a]
 reverseAppend xs ys = foldl (flip (:)) [] xs ++ ys
 
@@ -605,6 +605,13 @@ eval (Val x) _ = x
 eval (Var x) f = f x
 eval (Add x y) f = eval x f + eval y f
 eval (Mul x y) f = eval x f * eval y f
+
+data Tree = Leaf Int | Node Tree Int Tree
+occurs :: Int -> Tree -> Bool
+occurs m (Leaf n)            = m==n
+occurs m (Node l n r) | m==n = True
+                      | m<n  = occurs m l
+                      | m>n  = occurs m r
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
