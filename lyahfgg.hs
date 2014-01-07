@@ -571,11 +571,21 @@ reverse_foldl xs = foldl (\xs x -> x : xs) [] xs
 reverse_foldr :: [a] -> [a]
 reverse_foldr xs = foldr (\x xs -> xs ++ [x]) [] xs
 
+reverse_flip :: [a] -> [a]
+reverse_flip xs = foldl (flip (:)) [] xs
+
 concate_foldr :: [a] -> [a] -> [a]
 concate_foldr xs ys = foldr (\x xs -> x : xs) xs ys
 
-concate_foldl :: [a] -> [a] -> [a]
-concate_foldl xs ys = foldr (\x xs -> x : xs) xs ys
+-- flip :: (a -> b -> c) -> b -> a -> c
+flipV1 f = g
+	where g x y = f y x
+flipV2 f = \x y -> f y x
+flipV3 f x y = f y x
+
+
+--concate_foldl :: [a] -> [a] -> [a]
+--concate_foldl xs ys = foldr (\xs x -> xs ++ [x]) xs ys
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -682,3 +692,6 @@ main = do
 
 	print(reverse_foldl [1, 2, 3, 4, 5])
 	print(reverse_foldr [1, 2, 3, 4, 5])
+	print(reverse_flip [1, 2, 3, 4, 5])
+
+	print(concate_foldr [1, 2, 3, 4, 5] [1, 2, 3, 4, 5])
