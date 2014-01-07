@@ -583,9 +583,10 @@ flipV3 f x y = f y x
 concate_foldr :: [a] -> [a] -> [a]
 concate_foldr xs ys = foldr (\x xs -> x : xs) xs ys
 
---concate_foldl :: [a] -> [a] -> [a]
+-- concate_foldl :: [a] -> [a] -> [a]
 
 -- revConcate [3, 2, 1] [4, 5, 6] -> [1, 2, 3, 4, 5, 6]
+revConcate :: [a] -> [a] -> [a]
 revConcate xs ys = foldl (flip (:)) [] xs ++ ys
 
 main = do
