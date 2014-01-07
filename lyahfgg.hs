@@ -554,6 +554,10 @@ myFoldl :: (a -> b -> a) -> a -> [b] -> a
 myFoldl f v [] = v
 myFoldl f v (x : xs) = myFoldl f (v `f` x) xs
 
+-- Types: 
+-- foldl :: (a -> b -> a) -> a -> [b] -> a
+-- foldr :: (a -> b -> b) -> b -> [a] -> b
+
 -- todo reverse, ++ and && implement with foldr and foldl implement.
 and_foldr :: [Bool] -> Bool
 and_foldr x = foldr (==) True x
