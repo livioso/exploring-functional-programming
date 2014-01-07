@@ -585,9 +585,13 @@ concate_foldr xs ys = foldr (\x xs -> x : xs) xs ys
 
 -- concate_foldl :: [a] -> [a] -> [a]
 
--- revConcate [3, 2, 1] [4, 5, 6] -> [1, 2, 3, 4, 5, 6]
-revConcate :: [a] -> [a] -> [a]
-revConcate xs ys = foldl (flip (:)) [] xs ++ ys
+-- reverseAppend [3, 2, 1] [4, 5, 6] -> [1, 2, 3, 4, 5, 6]
+reverseAppend :: [a] -> [a] -> [a]
+reverseAppend xs ys = foldl (flip (:)) [] xs ++ ys
+
+reverseAppendImproved :: [a] -> [a] -> [a]
+reverseAppendImproved = flip(foldl(flip(:))) -- ???
+
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -697,4 +701,6 @@ main = do
 	print(reverse_flip [1, 2, 3, 4, 5])
 
 	print(concate_foldr [1, 2, 3, 4, 5] [1, 2, 3, 4, 5])
-	print(revConcate [3, 2, 1] [4, 5, 6])
+	
+	print(reverseAppend [3, 2, 1] [4, 5, 6])
+	print(reverseAppendImproved [3, 2, 1] [4, 5, 6])
