@@ -586,12 +586,25 @@ concate_foldr xs ys = foldr (\x xs -> x : xs) xs ys
 -- concate_foldl :: [a] -> [a] -> [a]
 
 -- reverseAppend [3, 2, 1] [4, 5, 6] -> [1, 2, 3, 4, 5, 6]
+-- -------->>>>>> (:) :: a -> [a] -> [a]
 reverseAppend :: [a] -> [a] -> [a]
 reverseAppend xs ys = foldl (flip (:)) [] xs ++ ys
 
 reverseAppendImproved :: [a] -> [a] -> [a]
 reverseAppendImproved = flip(foldl(flip(:))) -- ???
 
+--Tree Evaluation
+data Expr = 
+	Val Int | 
+	Var String | 
+	Add Expr Expr | 
+	Mul Expr Expr
+
+eval :: Expr -> (String -> Int) -> Int
+eval (Val x) _ = x
+eval (Var x) f = f x
+eval (Add x y) f = eval x f + eval y f
+eval (Mul x y) f = eval x f * eval y f
 
 main = do
 	let myMercedes = MercedesDesc C180 Pink
@@ -701,6 +714,6 @@ main = do
 	print(reverse_flip [1, 2, 3, 4, 5])
 
 	print(concate_foldr [1, 2, 3, 4, 5] [1, 2, 3, 4, 5])
-	
+
 	print(reverseAppend [3, 2, 1] [4, 5, 6])
 	print(reverseAppendImproved [3, 2, 1] [4, 5, 6])
