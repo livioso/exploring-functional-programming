@@ -555,6 +555,9 @@ sum_foldl1 = foldl((+)) 0
 sum_foldr :: Num a => [a] -> a
 sum_foldr = foldr(\x acc -> acc + x) 0
 
+length_foldr :: [a] -> Integer
+length_foldr = foldr(\x acc -> acc + 1) 0
+
 myFoldr :: (a -> b -> b) -> b -> [a] -> b
 myFoldr f v [] = v
 myFoldr f v (x : xs) = x `f` myFoldr f v xs
@@ -737,3 +740,5 @@ main = do
 	print(sum_foldl0 [1,2,3])
 	print(sum_foldl1 [1,2,3])
 	print(sum_foldr [1,2,3])
+
+	print(length_foldr "...")
