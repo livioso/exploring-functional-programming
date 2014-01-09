@@ -546,6 +546,15 @@ removeEvenFromList (x : xs)
 	| (mod (length xs) 2) == 0 = removeEvenFromList xs
 	| otherwise = x : (removeEvenFromList xs)
 
+sum_foldl0 :: Num a => [a] -> a
+sum_foldl0 xs = foldl(\acc x -> acc + x) 0 xs
+
+sum_foldl1 :: Num a => [a] -> a 
+sum_foldl1 = foldl((+)) 0
+
+sum_foldr :: Num a => [a] -> a
+sum_foldr = foldr(\x acc -> acc + x) 0
+
 myFoldr :: (a -> b -> b) -> b -> [a] -> b
 myFoldr f v [] = v
 myFoldr f v (x : xs) = x `f` myFoldr f v xs
@@ -724,3 +733,7 @@ main = do
 
 	print(reverseAppend [3, 2, 1] [4, 5, 6])
 	print(reverseAppendImproved [3, 2, 1] [4, 5, 6])
+
+	print(sum_foldl0 [1,2,3])
+	print(sum_foldl1 [1,2,3])
+	print(sum_foldr [1,2,3])
