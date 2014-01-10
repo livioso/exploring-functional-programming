@@ -742,3 +742,9 @@ main = do
 	print(sum_foldr [1,2,3])
 
 	print(length_foldr "...")
+
+	-- where the tree looks like this:
+	-- 				5
+	--		3 				7
+	--	1 		4 		6		9
+	print(occurs 5 (Node (Node (Leaf 1) 3 (Leaf 4)) 5 (Node (Leaf 6) 7 (Leaf 9))))
