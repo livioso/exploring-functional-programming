@@ -642,6 +642,12 @@ rootInTree :: Tree -> Int
 rootInTree (Node l n f) = n
 rootInTree (Leaf n) = n
 
+xorOnPair :: (Bool, Bool) -> Bool
+xorOnPair (lhs, rhs)
+				| (lhs == True) && (rhs == True) = False
+				| (lhs == False) && (rhs == False) = False
+				| otherwise = True
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -771,3 +777,8 @@ main = do
 	print(minInBinarySearchTree myBST)
 	print(rootInTree myBST)
 	print(rootInTree (Leaf 1))
+
+	print(xorOnPair (False, False)) -- False
+	print(xorOnPair (False, True))	-- True
+	print(xorOnPair (True, False))	-- True
+	print(xorOnPair (False, False)) -- False
