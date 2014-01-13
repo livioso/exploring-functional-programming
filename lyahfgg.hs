@@ -625,8 +625,8 @@ data Tree = Leaf Int | Node Tree Int Tree
 occursInBinarySearchTree :: Int -> Tree -> Bool
 occursInBinarySearchTree m (Leaf n) = m == n
 occursInBinarySearchTree m (Node l n r) | m == n = True
-                      | m < n  = occurs m l
-                      | m > n  = occurs m r
+                      | m < n  = occursInBinarySearchTree m l
+                      | m > n  = occursInBinarySearchTree m r
 
 -- assuming binary search tree
 maxInBinarySearchTree :: Tree -> Int
@@ -764,3 +764,4 @@ main = do
 	--	1 		4 		6		9
 	print(occursInBinarySearchTree 5 myBST)
 	print(maxInBinarySearchTree myBST)
+	print(minInBinarySearchTree myBST)
