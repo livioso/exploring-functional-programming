@@ -572,10 +572,10 @@ myFoldl f v (x : xs) = myFoldl f (v `f` x) xs
 
 -- todo reverse, ++ and && implement with foldr and foldl implement.
 and_foldr :: [Bool] -> Bool
-and_foldr x = foldr (==) True x
+and_foldr xs = foldr (==) True xs
 
 and_foldl :: [Bool] -> Bool
-and_foldl x = foldr (==) True x
+and_foldl x = foldl (\x acc -> acc == x) True x
 
 reverse_foldl :: [a] -> [a]
 reverse_foldl xs = foldl (\xs x -> x : xs) [] xs
