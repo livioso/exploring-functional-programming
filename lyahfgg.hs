@@ -572,7 +572,7 @@ myFoldl f v (x : xs) = myFoldl f (v `f` x) xs
 
 -- todo reverse, ++ and && implement with foldr and foldl implement.
 and_foldr :: [Bool] -> Bool
-and_foldr xs = foldr (==) True xs
+and_foldr xs = foldr (\acc x -> acc == x) True xs
 
 and_foldl :: [Bool] -> Bool
 and_foldl x = foldl (\x acc -> acc == x) True x
@@ -618,6 +618,9 @@ eval (Var x) f = f x
 eval (Add x y) f = eval x f + eval y f
 eval (Mul x y) f = eval x f * eval y f
 
+-- Leaf :: Int -> Tree
+-- Node :: Tree -> Int -> Tree -> Tree
+-- example : Node (Leaf 1) 3 (Leaf 4)
 data Tree = Leaf Int | Node Tree Int Tree
 --					 | 		^ Left   ^ Right 
 
