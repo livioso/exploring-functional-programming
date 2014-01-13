@@ -638,6 +638,10 @@ minInBinarySearchTree :: Tree -> Int
 minInBinarySearchTree (Leaf n) = n
 minInBinarySearchTree (Node l n r) = minInBinarySearchTree l
 
+rootInTree :: Tree -> Int
+rootInTree (Node l n f) = n
+rootInTree (Leaf n) = n
+
 main = do
 	let myMercedes = MercedesDesc C180 Pink
 	print (myMercedes)
@@ -765,3 +769,5 @@ main = do
 	print(occursInBinarySearchTree 5 myBST)
 	print(maxInBinarySearchTree myBST)
 	print(minInBinarySearchTree myBST)
+	print(rootInTree myBST)
+	print(rootInTree (Leaf 1))
