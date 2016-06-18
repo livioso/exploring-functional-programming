@@ -1,0 +1,12 @@
+{
+  "name": "elm-livioso",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "watch": "chokidar '**/*.elm' -c 'elm make Main.elm --output elm.compiled.js' --initial"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "elm": "^0.17.0"
+  }
+}
